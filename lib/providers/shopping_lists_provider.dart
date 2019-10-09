@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './shopping_list.dart';
+import './shopping_list_item.dart';
 
 enum FilterOptions {
   Favorites,
@@ -35,8 +36,21 @@ class ShoppingListsProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addShoppingList() {
-    // _items.add();
+  void addShoppingList({
+    String title,
+    String description = '',
+    bool isFavorite = false,
+    List<ShoppingListItem> items,
+  }) {
+    _items.add(
+      ShoppingList(
+        title: title,
+        description: description,
+        isFavorite: isFavorite,
+        id: DateTime.now().toString(),
+        items: items,
+      ),
+    );
 
     notifyListeners();
   }

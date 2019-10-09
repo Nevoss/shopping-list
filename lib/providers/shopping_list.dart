@@ -13,7 +13,10 @@ class ShoppingList with ChangeNotifier {
     @required this.title,
     this.description = '',
     this.isFavorite = false,
-  });
+    List<ShoppingListItem> items,
+  }) {
+    _items = items == null ? [] : items;
+  }
 
   void toggleFavorite() {
     isFavorite = !isFavorite;

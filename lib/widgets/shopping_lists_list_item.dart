@@ -6,10 +6,6 @@ import '../providers/shopping_lists_provider.dart';
 import '../screens/shopping_list_detail_screen.dart';
 
 class ShoppingListsListItem extends StatelessWidget {
-  // final ShoppingList item;
-
-  // ShoppingListsListItem(this.item);
-
   @override
   Widget build(BuildContext context) {
     final ShoppingList item = Provider.of<ShoppingList>(context);
@@ -19,6 +15,25 @@ class ShoppingListsListItem extends StatelessWidget {
     return Dismissible(
       onDismissed: (direction) {
         shoppingListsProvider.remove(item.id);
+
+        final scaffold = Scaffold.of(context);
+
+        scaffold.hideCurrentSnackBar();
+        scaffold.showSnackBar(
+          SnackBar(
+            content: Text('Shopping list removed.'),
+            duration: Duration(seconds: 2),
+            action: SnackBarAction(
+              label: 'Undo',
+              onPressed: () {
+                shoppingListsProvider.addShoppingList(
+                  title: item.title,
+                  description: item.description,
+                );
+              },
+            ),
+          ),
+        );
       },
       direction: DismissDirection.endToStart,
       key: ValueKey(item.id),

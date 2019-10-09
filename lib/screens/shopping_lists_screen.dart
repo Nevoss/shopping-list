@@ -36,6 +36,10 @@ class _ShoppingListsScreenState extends State<ShoppingListsScreen> {
       body: ShoppingListsList(
         _filterOptions,
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
     );
   }
 }
